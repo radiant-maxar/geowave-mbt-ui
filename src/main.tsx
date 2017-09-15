@@ -12,14 +12,13 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import {Provider} from 'mobx-react'
 
-import Application from './components/Application'
-
-import store from './store'
+import { createStore } from './store'
+import { createRouter } from './router'
 
 
 ReactDOM.render(
-    <Provider {...{ store }}>
-        <Application/>
+    <Provider {...{ store: createStore() }}>
+        {createRouter()}
     </Provider>,
     document.querySelector('#application-viewport'),
 )

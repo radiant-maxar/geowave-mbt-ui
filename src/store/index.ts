@@ -1,56 +1,35 @@
-import { action, observable, runInAction, useStrict } from 'mobx'
+import { action, observable, useStrict } from 'mobx'
+
+import { RouterStore } from 'mobx-react-router'
 
 import * as http from '../utils/http'
-
-import { BUILD_ENVIRONMENT, IS_RED } from '../config'
 
 
 useStrict(true)
 
-class Store implements IStore {
-    @observable revision = null
-    @observable environment = BUILD_ENVIRONMENT
-    @observable isRed = IS_RED
-    @observable isFetchingRevision = false
+
+class Store {
+    @observable isPanelOpen: boolean = false
+    @observable userName: string = null
+
+    constructor(public router: RouterStore = new RouterStore()) {}
 
     @action
-    async fetchRevision() {
-        this.isFetchingRevision = true
-        try {
-            const response = await http.get<string>('/')
-
-            const revision = new DOMParser()
-                .parseFromString(response.data, 'text/html')
-                .documentElement
-                .getAttribute('data-app-revision')
-
-            runInAction(() => this.revision = revision)
-        }
-        catch (err) {
-            this.isFetchingRevision = false
-            console.error('[store] Oh no: %s', err.message)
-        }
-        finally {
-            runInAction(() => this.isFetchingRevision = false)
-        }
-    }
-
-    @action
-    toggleRed() {
-        this.isRed = !this.isRed
+    togglePanel() {
+        console.debug(http)
+        this.isPanelOpen = !this.isPanelOpen
     }
 }
 
 
-export interface IStore {
-    revision: string
-    environment: string
-    isRed: boolean
-    isFetchingRevision: boolean
+export function createStore() {
+    const store = new Store()
 
-    fetchRevision(): Promise<void>
-    toggleRed(): void
+    http.onSessionExpired(() => {
+        store.router.push('/login')
+    })
+    return store
 }
 
 
-export default new Store()
+export type IStore = Store
