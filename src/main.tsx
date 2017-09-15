@@ -21,5 +21,5 @@ ReactDOM.render(
     <Provider {...{ store }}>
         <Application/>
     </Provider>,
-    document.querySelector('#Application'),
+    document.querySelector('#application-viewport'),
 )

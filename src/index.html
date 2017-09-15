@@ -3,8 +3,33 @@
     <head>
         <meta charset="utf-8"/>
         <title><%= htmlWebpackPlugin.options.app.name %> v<%= htmlWebpackPlugin.options.app.version %></title>
+        <style type="text/css">
+            .classification-banner {
+                position: absolute;
+                left: 0;
+                right: 0;
+                background-color: green;
+                color: white;
+                line-height: 25px;
+                font-family: 'Source Sans Pro', sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+                text-align: center;
+                z-index: 999999;
+            }
+
+            #application-viewport {
+                position: absolute;
+                top: 25px;
+                left: 0;
+                right: 0;
+                bottom: 25px;
+            }
+        </style>
     </head>
     <body>
-        <div id="Application"></div>
+        <div id="application-viewport"></div>
+        <div class="classification-banner" style="top: 0;">UNCLASSIFIED // FOR TEST AND DEVELOPMENT PURPOSES ONLY</div>
+        <div class="classification-banner" style="bottom: 0;">UNCLASSIFIED // FOR TEST AND DEVELOPMENT PURPOSES ONLY</div>
     </body>
 </html>
