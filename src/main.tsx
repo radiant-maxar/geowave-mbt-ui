@@ -1,4 +1,5 @@
 // Styles
+import './styles/webfonts/index.css'
 import './styles/globals.less'
 
 
