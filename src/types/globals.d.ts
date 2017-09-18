@@ -1,3 +1,10 @@
+declare namespace geowave {
+    interface User {
+        dn: string
+        firstName: string
+        lastName: string
+    }
+}
 
 //
 // Webpack Interop

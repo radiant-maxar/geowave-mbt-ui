@@ -10,15 +10,20 @@ import 'core-js/es6'
 // Bootstrapping
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import {Provider} from 'mobx-react'
+import { Provider } from 'mobx-react'
 
+import Application from './components/Application'
 import { createStore } from './store'
-import { createRouter } from './router'
+
+
+const store = createStore()
+
+window['___store___'] = store  // tslint:disable-line
 
 
 ReactDOM.render(
-    <Provider {...{ store: createStore() }}>
-        {createRouter()}
+    <Provider {...{ store }}>
+        <Application/>
     </Provider>,
     document.querySelector('#application-viewport'),
 )

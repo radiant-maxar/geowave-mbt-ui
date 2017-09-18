@@ -12,6 +12,7 @@ const {
     API_PROXY = 'http://localhost:3001',
     COMPILER_TARGET = NODE_ENV === 'production' ? 'es5' : 'es2017',
     GIT_REV = execSync('git rev-parse HEAD 2>/dev/null || echo -').toString(),
+    USER_AGREEMENT = '<p>Users must accept the terms and conditions of the User Agreement before signing in.</p>',
 } = process.env
 
 
@@ -59,7 +60,11 @@ module.exports = {
 
     devServer: {
         proxy: {
-            '/api': API_PROXY,
+            '/auth': API_PROXY,
+            '/api': {
+                target: API_PROXY,
+                pathRewrite: {'/^api': ''},
+            },
         },
         historyApiFallback: true,
         clientLogLevel: 'warning',
@@ -79,6 +84,7 @@ module.exports = {
                 version: pkg.version,
                 revision: GIT_REV,
             },
+            userAgreement: USER_AGREEMENT,
         }),
     ],
 

@@ -25,11 +25,16 @@
                 right: 0;
                 bottom: 25px;
             }
+
+            #user-agreement {
+                display: none;
+            }
         </style>
     </head>
     <body>
         <div id="application-viewport"></div>
         <div class="classification-banner" style="top: 0;">UNCLASSIFIED // FOR TEST AND DEVELOPMENT PURPOSES ONLY</div>
         <div class="classification-banner" style="bottom: 0;">UNCLASSIFIED // FOR TEST AND DEVELOPMENT PURPOSES ONLY</div>
+        <div id="user-agreement"><%= htmlWebpackPlugin.options.userAgreement %></div>
     </body>
 </html>
