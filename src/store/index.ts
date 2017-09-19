@@ -11,14 +11,7 @@ useStrict(true)
 
 class Store {
     @observable isPanelOpen: boolean = false
-    @observable errors: IError[] = [
-        {
-            "cause": new TypeError('lolwut'),
-            "heading": "oh no",
-            "message": "something bad happened",
-            "id": "8b87f26df6"
-        }
-    ]
+    @observable errors: IError[] = []
     @observable isLoggingIn: boolean = false
 
     @observable user: geowave.User = deserialized(KEY_USER)
