@@ -3,13 +3,14 @@ import * as $ from 'classnames'
 import { inject, observer } from 'mobx-react'
 
 import { BottomPanel } from './BottomPanel'
+import { ErrorModal } from './ErrorModal'
 import Login from './Login'
 import { Navigation } from './Navigation'
 import { PrimaryMap } from './PrimaryMap'
 
 import styles from './Application.less'
 
-import { IStore } from '../store'
+import { IError, IStore } from '../store'
 
 
 export class Application extends React.Component<IInternalProps, never> {
@@ -35,16 +36,30 @@ export class Application extends React.Component<IInternalProps, never> {
                     isOpen={this.props.isPanelOpen}
                     onToggle={this.props.onPanelToggle}
                 />
+
+                {this.props.errors.map(error => (
+                    <ErrorModal
+                        className={styles.errorModal}
+                        key={error.id}
+                        error={error}
+                        onDismiss={() => this.props.dismissError(error.id)}
+                    />
+                ))}
             </main>
         )
     }
 }
 
 
-export default inject<IInternalProps, {}>(({ store }: { store: IStore }) => ({
+export default inject(({ store }: { store: IStore }): IInternalProps => ({
+    errors:      store.errors,
     isLoggedIn:  store.isLoggedIn,
     isPanelOpen: store.isPanelOpen,
-    user: store.user,
+    user:        store.user,
+
+    dismissError(id: string) {
+        store.dismissError(id)
+    },
 
     onLogOut() {
         store.logout()
@@ -62,10 +77,12 @@ export default inject<IInternalProps, {}>(({ store }: { store: IStore }) => ({
  */
 
 interface IInternalProps extends IExternalProps {
+    errors: IError[]
     isLoggedIn: boolean
     isPanelOpen: boolean
     user: geowave.User
 
+    dismissError(id: string): void
     onLogOut(): void
     onPanelToggle(): void
 }

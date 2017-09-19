@@ -1,0 +1,62 @@
+@import "../styles/constants.less";
+
+.root {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    color: white;
+    background-color: fade(@COLOR_RED, 80%);
+    font-size: 16px;
+}
+
+.section {
+    padding: 0 ~"calc(50% - 350px)";
+
+    & + & {
+        margin-top: 15px;
+    }
+}
+
+.heading {
+    composes: section;
+    font-size: 2em;
+}
+
+.headingIcon {
+    position: relative;
+    top: -.05em;
+}
+
+.headingText {
+    margin-left: .2em;
+}
+
+.body {
+    composes: section;
+}
+
+.stacktrace {
+    composes: section;
+    padding: 2em 4em;
+    overflow-x: auto;
+    font-size: 14px;
+    background-color: fade(black, 35%);
+    color: white;
+}
+
+.controls {
+    composes: section;
+}
+
+.dismissButton {
+    background-color: white;
+    border-bottom-color: transparent;
+    color: darken(@COLOR_RED, 20%);
+}

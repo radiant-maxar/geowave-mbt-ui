@@ -3,6 +3,7 @@
 @mapZ: 1;
 @navigationZ: @mapZ + 1;
 @bottomPanelZ: @mapZ + 1;
+@errorModalZ: @mapZ + 2;
 
 
 .root {
@@ -45,4 +46,13 @@
     .isPanelOpen & {
         height: @BOTTOM_PANEL_HEIGHT !important;
     }
+}
+
+.errorModal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: @errorModalZ;
 }

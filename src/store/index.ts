@@ -11,6 +11,14 @@ useStrict(true)
 
 class Store {
     @observable isPanelOpen: boolean = false
+    @observable errors: IError[] = [
+        {
+            "cause": new TypeError('lolwut'),
+            "heading": "oh no",
+            "message": "something bad happened",
+            "id": "8b87f26df6"
+        }
+    ]
     @observable isLoggingIn: boolean = false
 
     @observable user: geowave.User = deserialized(KEY_USER)
@@ -18,6 +26,21 @@ class Store {
     @computed
     get isLoggedIn() {
         return !!this.user
+    }
+
+    @action
+    appendError(heading: string, message: string, cause: Error) {
+        this.errors.push({
+            cause,
+            heading,
+            message,
+            id: Math.random().toString(16).substr(5),
+        })
+    }
+
+    @action
+    dismissError(id: string) {
+        this.errors = this.errors.filter(e => e.id !== id)
     }
 
     @action
@@ -64,6 +87,14 @@ export function createStore() {
 
 
 export type IStore = Store
+
+
+export interface IError {
+    id: string
+    heading: string
+    message: string
+    cause: Error
+}
 
 
 //
