@@ -61,6 +61,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/auth': API_PROXY,
+            '/basemaps': API_PROXY,
             '/api': {
                 target: API_PROXY,
                 pathRewrite: {'/^api': ''},

@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <title><%= htmlWebpackPlugin.options.app.name %> v<%= htmlWebpackPlugin.options.app.version %></title>
+
         <style type="text/css">
             .classification-banner {
                 position: absolute;
@@ -30,6 +31,29 @@
                 display: none;
             }
         </style>
+
+        <script>
+            var BASEMAPS = [
+                {
+                    id: 'dark',
+                    name: 'Dark (Default)',
+                    maxZoom: 21,
+                    attributions: '<a href="https://www.mapbox.com/about/maps/" target="_blank" rel="noopener">&copy; MapBox</a> <a href="http://www.openstreetmap.org/about/" target="_blank" rel="noopener">&copy; OpenStreetMap</a>',
+                },
+                {
+                    id: 'aerial',
+                    name: 'Aerial',
+                    maxZoom: 21,
+                    attributions: '<a href="https://www.mapbox.com/about/maps/" target="_blank" rel="noopener">&copy; MapBox</a> <a href="http://www.openstreetmap.org/about/" target="_blank" rel="noopener">&copy; OpenStreetMap</a> &copy; <a href="https://www.digitalglobe.com/" target="_blank" rel="noopener">DigitalGlobe</a>',
+                },
+                {
+                    id: 'osm',
+                    name: 'OpenStreetMap',
+                    maxZoom: 21,
+                    attributions: '<a href="https://www.mapbox.com/about/maps/" target="_blank" rel="noopener">&copy; MapBox</a> <a href="http://www.openstreetmap.org/about/" target="_blank" rel="noopener">&copy; OpenStreetMap</a>',
+                },
+            ]
+        </script>
     </head>
     <body>
         <div id="application-viewport"></div>

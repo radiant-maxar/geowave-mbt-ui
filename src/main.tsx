@@ -18,7 +18,7 @@ import { createStore } from './store'
 
 const store = createStore()
 
-window['___store___'] = store  // tslint:disable-line
+window['__store__'] = store  // tslint:disable-line
 
 
 ReactDOM.render(

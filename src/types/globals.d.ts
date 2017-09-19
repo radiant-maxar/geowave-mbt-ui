@@ -6,6 +6,12 @@ declare namespace geowave {
     }
 }
 
+
+interface Hash<T> {
+    [key: string]: T
+}
+
+
 //
 // Webpack Interop
 //
