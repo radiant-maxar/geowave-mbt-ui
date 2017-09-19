@@ -2,11 +2,12 @@ import * as React from 'react'
 import * as $ from 'classnames'
 import { inject, observer } from 'mobx-react'
 
-import styles from './Application.less'
 import { BottomPanel } from './BottomPanel'
 import Login from './Login'
 import { Navigation } from './Navigation'
 import { PrimaryMap } from './PrimaryMap'
+
+import styles from './Application.less'
 
 import { IStore } from '../store'
 

@@ -4,11 +4,13 @@ import { inject, observer } from 'mobx-react'
 import LockIcon from 'react-icons/lib/fa/lock'
 
 import { Button } from './ui/Button'
-import { IStore } from '../store/index'
 import { DiscAnimation } from './ui/ActivityIndicator'
+import { GeoWaveIcon } from './GeoWaveIcon'
 
 import styles from './Login.less'
-import { GeoWaveIcon } from './GeoWaveIcon'
+
+import { IStore } from '../store/index'
+
 
 class Login extends React.Component<IInternalProps, never> {
     componentDidMount() {

@@ -11,7 +11,7 @@ const {
     NODE_ENV = 'development',
     API_PROXY = 'http://localhost:3001',
     COMPILER_TARGET = NODE_ENV === 'production' ? 'es5' : 'es2017',
-    GIT_REV = execSync('git rev-parse HEAD 2>/dev/null || echo -').toString(),
+    GIT_REV = execSync('git rev-parse HEAD 2>/dev/null || echo -').toString().trim(),
     USER_AGREEMENT = '<p>Users must accept the terms and conditions of the User Agreement before signing in.</p>',
 } = process.env
 
