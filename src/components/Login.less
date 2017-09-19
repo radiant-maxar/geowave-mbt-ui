@@ -1,4 +1,4 @@
-@import "../styles/globals.less";
+@import "../styles/constants.less";
 
 .root {
     position: absolute;
@@ -10,31 +10,52 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: @COLOR_BLUE;
+    background-color: @COLOR_GREEN;
 }
 
 .heading {
-    font-size: 75px;
-    font-weight: 200;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 300;
+    color: white;
+    text-transform: uppercase;
+}
+
+.geowaveIcon {
+    font-size: 2em;
     color: white;
 }
 
 .userAgreement {
     @baseColor: @COLOR_SILVER;
     margin: 2em 0;
-    padding: 15px;
-    min-width: 50em;
-    background-color: white;
+    padding: 15px ~"calc((50% - 400px) + 15px)";
+    min-width: 800px;
+    background-color: fade(white, 90%);
     box-shadow: @SHADOW;
+
+    li + li {
+        margin-top: .5em;
+    }
 }
 
-.loading__animation {
-    height: 100px;
+.loginButton {
+    padding: 8px 15px;
+    font-size: 1.2em;
 }
 
-.loading__message {
-    margin-top: 1em;
-    font-size: 32px;
+.loginButtonIcon {
+    position: relative;
+    top: -.15em;
+}
+
+.loadingAnimation {
+    height: 65px;
+}
+
+.loadingMessage {
+    margin-top: .5em;
+    font-size: 20px;
     font-weight: 300;
     color: white;
 }

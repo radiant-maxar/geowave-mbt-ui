@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as $ from 'classnames'
 import { inject, observer } from 'mobx-react'
+import LockIcon from 'react-icons/lib/fa/lock'
 
 import { Button } from './ui/Button'
 import { IStore } from '../store/index'
@@ -21,8 +22,8 @@ class Login extends React.Component<IInternalProps, never> {
         if (this.props.isLoggingIn) {
             return (
                 <div className={$(styles.root, this.props.className)}>
-                    <DiscAnimation className={styles.loading__animation} />
-                    <div className={styles.loading__message}>Just a moment while we log you in...</div>
+                    <DiscAnimation className={styles.loadingAnimation} />
+                    <div className={styles.loadingMessage}>Just a moment while we log you in...</div>
                 </div>
             )
         }
@@ -30,7 +31,8 @@ class Login extends React.Component<IInternalProps, never> {
         return (
             <div className={$(styles.root, this.props.className)}>
                 <div className={styles.heading}>
-                    <GeoWaveIcon flat />
+                    <GeoWaveIcon flat className={styles.geowaveIcon} />
+                    <div className={styles.title}>GeoWave MapBox Telemetry Visualizer</div>
                 </div>
                 <div
                     className={styles.userAgreement}
@@ -40,7 +42,10 @@ class Login extends React.Component<IInternalProps, never> {
                 />
                 <div className={styles.controls}>
                     <Button
-                        icon={<span>&times;</span>}
+                        primary
+                        className={styles.loginButton}
+                        classes={{ icon: styles.loginButtonIcon }}
+                        icon={<LockIcon />}
                         label="Accept and Log In with GeoAxis"
                         onClick={() => location.href = '/auth/login'}
                     />
