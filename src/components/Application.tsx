@@ -47,7 +47,7 @@ export default inject<IInternalProps, {}>(({ store }: { store: IStore }) => ({
 
     onLogOut() {
         store.logout()
-        // location.href = '/auth/logout'
+        location.href = '/auth/logout'
     },
 
     onPanelToggle() {
