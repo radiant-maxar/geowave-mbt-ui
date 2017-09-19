@@ -23,6 +23,7 @@ export class Application extends React.Component<IInternalProps, never> {
         return (
             <main className={$(styles.root, this.props.isPanelOpen && styles.isPanelOpen)}>
                 <Navigation
+                    className={styles.navigation}
                     user={this.props.user}
                     onLogOut={this.props.onLogOut}
                 />

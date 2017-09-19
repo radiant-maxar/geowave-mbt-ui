@@ -1,5 +1,48 @@
 @import "../styles/constants.less";
 
-.isPanelOpen {
-    background-color: red;
+@mapZ: 1;
+@navigationZ: @mapZ + 1;
+@bottomPanelZ: @mapZ + 1;
+
+
+.root {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.navigation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: @NAVIGATION_HEIGHT;
+    z-index: @navigationZ;
+}
+
+.primaryMap {
+    position: absolute;
+    top: @NAVIGATION_HEIGHT;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: @mapZ;
+
+    .isPanelOpen & {
+        bottom: @BOTTOM_PANEL_HEIGHT !important;
+    }
+}
+
+.bottomPanel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: @bottomPanelZ;
+
+    .isPanelOpen & {
+        height: @BOTTOM_PANEL_HEIGHT !important;
+    }
 }
