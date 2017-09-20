@@ -1,0 +1,63 @@
+@import "../styles/constants.less";
+
+@borderRadius: 3px;
+@buttonSize: 30px;
+@menuWidth: 200px;
+@backgroundColor: white;
+@foregroundColor: @COLOR_ORANGE;
+
+.root {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+}
+
+.button {
+    pointer-events: all;
+    width: @buttonSize;
+    height: @buttonSize;
+    font-size: @buttonSize * .5;
+    background-color: @backgroundColor;
+    color: @foregroundColor;
+    cursor: pointer;
+    border: none;
+    border-radius: @borderRadius;
+    box-shadow: @SHADOW, 0 0 0 1px fade(black, 10%);
+
+    &:hover,
+    .isOpen & {
+        background-color: @foregroundColor;
+        color: @backgroundColor;
+    }
+}
+
+.buttonIcon {
+    position: relative;
+    top: -.15em;
+}
+
+.menu {
+    pointer-events: all;
+    display: none;
+    margin-top: 15px;
+    border-radius: @borderRadius;
+    box-shadow: @SHADOW;
+
+    .isOpen & {
+        display: block;
+    }
+}
+
+.menuItem {
+    &:first-child {
+        border-top-left-radius: @borderRadius;
+        border-top-right-radius: @borderRadius;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: @borderRadius;
+        border-bottom-right-radius: @borderRadius;
+    }
+}

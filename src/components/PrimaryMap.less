@@ -1,17 +1,51 @@
+@import "../styles/constants.less";
+
+@controlZIndex: 1001;  // Beats out Leaflet's built-in z indices
+
 .root {
     position: relative;
+}
+
+.basemapPicker {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    bottom: 15px;
+    z-index: @controlZIndex;
 }
 
 .watermark {
     position: absolute;
     bottom: 40px;
     right: 15px;
-    z-index: 1001;
+    z-index: @controlZIndex;
 }
 
 :global .leaflet-container {
+    @foregroundColor: @COLOR_ORANGE;
+    @backgroundColor: white;
+
     font-family: inherit;
     font-size: inherit;
+
+    .leaflet-control-zoom {
+        border: none;
+        box-shadow: @SHADOW, 0 0 0 1px fade(black, 10%);
+    }
+
+    .leaflet-control-zoom a {
+        color: @foregroundColor;
+        background-color: @backgroundColor;
+        border-color: fade(@foregroundColor, 20%);
+        font-size: 25px;
+        font-weight: lighter;
+        font-family: @FONT_MONOSPACE;
+
+        &:hover {
+            background-color: @foregroundColor;
+            color: @backgroundColor;
+        }
+    }
 
     .leaflet-control-attribution {
         padding: .1em .6em;

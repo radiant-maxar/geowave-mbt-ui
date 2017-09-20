@@ -1,5 +1,7 @@
 import * as L from 'leaflet'
 
+import { identified, Identifiable } from './utils/leaflet-helpers'
+
 
 const DEFAULT_CENTER = { lat: 0, lon: -10 }
 const DEFAULT_ZOOM = 1.75
@@ -15,7 +17,7 @@ const KEY_ZOOM    = 'MAP_ZOOM'
 
 
 let _instance: L.Map,
-    _currentBasemap: L.TileLayer
+    _currentBasemap: Identifiable<L.TileLayer>
 
 
 export function init(element: HTMLElement) {
@@ -44,6 +46,30 @@ export function init(element: HTMLElement) {
 }
 
 
+export function changeBasemap(basemap: string): void {
+    const incoming = BASEMAP_LAYERS[basemap]
+    if (incoming === _currentBasemap) {
+        return  // Nothing to do
+    }
+
+    console.debug('[primary-map] Set basemap to "%s"', basemap)
+    _currentBasemap.remove()
+    _currentBasemap = incoming
+    _currentBasemap.addTo(_instance)
+    sessionStorage.setItem(KEY_BASEMAP, incoming.id)
+}
+
+
+export function getBasemap(): string {
+    return sessionStorage.getItem(KEY_BASEMAP) || DEFAULT_BASEMAP
+}
+
+
+export function listBasemaps(): string[] {
+    return Object.keys(BASEMAP_LAYERS)
+}
+
+
 declare const window: {
     BASEMAPS: {
         id: string,
@@ -54,7 +80,7 @@ declare const window: {
 }
 
 
-function createBasemapLayers(): [Hash<L.TileLayer>, string] {
+function createBasemapLayers(): [Hash<Identifiable<L.TileLayer>>, string] {
     const layers = {}
 
     if (!Array.isArray(window.BASEMAPS)) {
@@ -67,11 +93,11 @@ function createBasemapLayers(): [Hash<L.TileLayer>, string] {
 
     const defaultBasemap = window.BASEMAPS[0].name
     window.BASEMAPS.forEach(basemap => {
-        layers[basemap.name] = L.tileLayer(`/basemaps/${basemap.id}/{z}/{x}/{y}.png`, {
+        layers[basemap.name] = identified(basemap.name, L.tileLayer(`/basemaps/${basemap.id}/{z}/{x}/{y}.png`, {
             attribution: basemap.attributions,
             maxZoom:     basemap.maxZoom,
             zIndex:      BASEMAP_Z_INDEX,
-        })
+        }))
     })
 
     return [layers, defaultBasemap]
