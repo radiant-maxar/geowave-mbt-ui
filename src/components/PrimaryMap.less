@@ -1,3 +1,25 @@
 .root {
     position: relative;
 }
+
+.watermark {
+    position: absolute;
+    bottom: 40px;
+    right: 15px;
+    z-index: 1001;
+}
+
+:global .leaflet-container {
+    font-family: inherit;
+    font-size: inherit;
+
+    .leaflet-control-attribution {
+        padding: .1em .6em;
+        background-color: fade(white, 30%);
+        font-size: 14px;
+
+        a {
+            color: black;
+        }
+    }
+}
