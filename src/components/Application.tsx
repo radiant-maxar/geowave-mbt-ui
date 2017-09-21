@@ -10,6 +10,7 @@ import { PrimaryMap } from './PrimaryMap'
 
 import styles from './Application.less'
 
+import { triggerReflow } from '../primary-map'
 import { IError, IStore } from '../store'
 
 
@@ -34,7 +35,7 @@ export class Application extends React.Component<IInternalProps, never> {
                 <BottomPanel
                     className={styles.bottomPanel}
                     isOpen={this.props.isPanelOpen}
-                    onToggle={this.props.onPanelToggle}
+                    onToggle={this.onPanelToggle}
                 />
 
                 {this.props.errors.map(error => (
@@ -47,6 +48,11 @@ export class Application extends React.Component<IInternalProps, never> {
                 ))}
             </main>
         )
+    }
+
+    private onPanelToggle = () => {
+        this.props.onPanelToggle()
+        setTimeout(triggerReflow, 200)
     }
 }
 

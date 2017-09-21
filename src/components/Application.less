@@ -30,6 +30,7 @@
     right: 0;
     bottom: 0;
     z-index: @mapZ;
+    transition: bottom .2s ease-in;
 
     .isPanelOpen & {
         bottom: @BOTTOM_PANEL_HEIGHT !important;
@@ -42,6 +43,7 @@
     left: 0;
     right: 0;
     z-index: @bottomPanelZ;
+    transition: height .2s ease-in;
 
     .isPanelOpen & {
         height: @BOTTOM_PANEL_HEIGHT !important;

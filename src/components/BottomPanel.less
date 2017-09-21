@@ -1,3 +1,83 @@
+@import "../styles/constants.less";
+
+@backgroundColor: white;
+@borderRadius: 5px;
+@contentZ: 1;
+@tabZ: 2;
+
 .root {
     position: relative;
+    pointer-events: none;
+    height: 0;
+    width: 100%;
+    background-color: @backgroundColor;
+
+    > * {
+        pointer-events: all;
+    }
+}
+
+.tab {
+    position: absolute;
+    bottom: 100%;
+    left: 1em;
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5em .5em;
+    font-size: 18px;
+    background-color: @backgroundColor;
+    border-top: 3px solid @COLOR_ORANGE;
+    border-top-left-radius: @borderRadius;
+    border-top-right-radius: @borderRadius;
+    cursor: pointer;
+    z-index: @tabZ;
+
+    &:hover {
+        color: @COLOR_ORANGE;
+    }
+}
+
+.tabIcon {
+    font-size: 22px;
+    color: @COLOR_BLUE;
+    shape-rendering: crispedges;
+
+    .tab:hover & {
+        color: inherit;
+    }
+}
+
+.tabLabel {
+    margin: 0 auto 0 .5em;
+    font-weight: bold;
+}
+
+.tabExpansionIndicator {
+    position: relative;
+    top: -.1em;
+    color: darken(@backgroundColor, 25%);
+    font-size: 22px;
+
+    .tab:hover & {
+        color: inherit;
+    }
+}
+
+.content {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    box-shadow: 0 -5px 10px fade(black, 15%);
+    z-index: @contentZ;
+
+    .isOpen & {
+        display: block;
+    }
 }

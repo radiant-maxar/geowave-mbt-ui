@@ -70,6 +70,15 @@ export function listBasemaps(): string[] {
 }
 
 
+export function triggerReflow(): void {
+    _instance.invalidateSize()
+}
+
+
+//
+// Helpers
+//
+
 declare const window: {
     BASEMAPS: {
         id: string,

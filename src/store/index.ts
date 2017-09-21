@@ -3,6 +3,7 @@ import { action, computed, observable, runInAction, useStrict } from 'mobx'
 import * as http from '../utils/http'
 
 
+const KEY_IS_PANEL_OPEN = 'IS_PANEL_OPEN'
 const KEY_USER = 'USER'
 
 
@@ -10,11 +11,11 @@ useStrict(true)
 
 
 class Store {
-    @observable isPanelOpen: boolean = false
+    @observable isPanelOpen: boolean = deserialized(KEY_IS_PANEL_OPEN) || false
     @observable errors: IError[] = []
     @observable isLoggingIn: boolean = false
 
-    @observable user: geowave.User = deserialized(KEY_USER)
+    @observable user: geowave.User = deserialized(KEY_USER, localStorage)
 
     @computed
     get isLoggedIn() {
@@ -41,7 +42,7 @@ class Store {
         this.isLoggingIn = true
         try {
             const response = await http.get<geowave.User>('/auth/whoami')
-            runInAction(() => this.user = serialized(KEY_USER, response.data))
+            runInAction(() => this.user = serialized(KEY_USER, response.data, localStorage))
         }
         catch (err) {
             if (err.response && err.response.status === 401) {
@@ -64,8 +65,7 @@ class Store {
 
     @action
     togglePanel() {
-        console.debug(http)
-        this.isPanelOpen = !this.isPanelOpen
+        this.isPanelOpen = serialized(KEY_IS_PANEL_OPEN, !this.isPanelOpen)
     }
 }
 
@@ -94,8 +94,8 @@ export interface IError {
 // Helpers
 //
 
-function deserialized<T>(key: string): T {
-    const value = localStorage.getItem(key)
+function deserialized<T>(key: string, storage = sessionStorage): T {
+    const value = storage.getItem(key)
     try {
         return JSON.parse(value)
     }
@@ -106,7 +106,7 @@ function deserialized<T>(key: string): T {
 }
 
 
-function serialized<T>(key: string, data: T): T {
-    localStorage.setItem(key, JSON.stringify(data, null, 2))
+function serialized<T>(key: string, data: T, storage = sessionStorage): T {
+    storage.setItem(key, JSON.stringify(data, null, 2))
     return data
 }
